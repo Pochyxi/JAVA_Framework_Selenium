@@ -61,23 +61,28 @@
     </test>
     <test nome="cerca pistola laser">
         <comando>
+<!--            vai su amazon-->
             <apri>https://www.amazon.it/ref=nav_logo</apri>
         </comando>
         <comando>
+<!--            accetta i cookies-->
             <clicca>#sp-cc-accept</clicca>
         </comando>
         <comando>
+<!--            clicca sulla barra di ricerca-->
             <clicca>#twotabsearchtextbox</clicca>
         </comando>
         <comando>
+<!--            scrivi pistola laser-->
             <scrivi>pistola laser</scrivi>
         </comando>
         <comando>
+<!--            clicca sulla lente di ricerca-->
             <clicca>span[id='nav-search-submit-text']</clicca>
         </comando>
         <comando>
+<!--            aspetta 5 secondi-->
             <aspetta>5 secondi</aspetta>
         </comando>
     </test>
-
 </Istruzioni>

@@ -5,5 +5,6 @@ public class Main {
 //        Executor.readAndRun("istruzioni", "safari");
         Executor.readAndRun( "istruzioni", "chrome" );
 //        Executor.readAndRun( "istruzioni", "edge" );
+//        Executor.readAndRun( "istruzioni", "firefox" );
     }
 }
