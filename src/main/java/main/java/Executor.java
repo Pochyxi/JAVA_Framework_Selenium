@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Executor {
 
-    public static void readAndRun(String xmlName) {
+    public static void readAndRun(String xmlName, String browserName) {
 
         // Instantiate the Factory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -97,8 +97,8 @@ public class Executor {
                 // essendo un ciclo tanti più test ci saranno tanti più liste verranno create
                 // ed eseguite
                 System.out.println( "------" );
-                System.out.println("-----> Eseguo istruzione con seleniomator");
-                Seleniomator.runTests( comandiDaEseguire );
+                System.out.println("-----> Eseguo istruzione con Seleniomator");
+                Seleniomator.runTests( comandiDaEseguire, browserName );
             }
         } catch( ParserConfigurationException | SAXException | IOException e ) {
             e.printStackTrace();

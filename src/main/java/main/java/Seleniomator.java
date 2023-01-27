@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -22,14 +25,36 @@ public class Seleniomator {
         }
     }
 
-    public static void runTests( List<String> arrayDiComandi ) throws InterruptedException {
+    public static void runTests( List<String> arrayDiComandi, String browserName ) throws InterruptedException {
         // se non esistono istruzioni
         if( arrayDiComandi.size() == 0 ) {
             System.out.println("nessun comando da eseguire");
         } else {
+            WebDriver driver = null;
             System.out.println("Apro il browser");
-            // apri chrome
-            WebDriver driver = new ChromeDriver();
+            switch (browserName){
+
+                case "chrome" -> {
+                    // apri chrome
+                     driver = new ChromeDriver();
+                }
+
+                case "firefox" -> {
+                    // apri firefox
+                     driver = new FirefoxDriver();
+                }
+
+                case "edge" -> {
+                    // apri edge
+                     driver = new EdgeDriver();
+                }
+
+                case "safari" -> {
+                    // apri safari
+                     driver = new SafariDriver();
+                }
+            }
+
 
             int seconds = 0;
 
@@ -37,8 +62,10 @@ public class Seleniomator {
             System.out.println("Contatto l'url ---> " + arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
             System.out.println( "------" );
 
-            // contatto url
-            driver.get( arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
+            if( driver != null ) {
+                // contatto url
+                driver.get( arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
+            }
 
             // eseguo ciclo sui comandi
             for( String comando : arrayDiComandi ) {
