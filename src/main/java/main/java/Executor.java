@@ -35,11 +35,13 @@ public class Executor {
             // optional, but recommended
             doc.getDocumentElement().normalize();
 
-            System.out.println( "Elemento radice :" + doc.getDocumentElement().getNodeName() );
+            System.out.println( "Eseguo " + doc.getDocumentElement().getNodeName() );
             System.out.println( "------" );
 
             // get <tests>
             NodeList listTest = doc.getElementsByTagName( "test" );
+            System.out.println("Trovati " + listTest.getLength() +  " tests");
+            System.out.println( "------" );
 
             // itero gli elementi (nodi) all'interno della lista comandi
             for( int x = 0 ; x < listTest.getLength() ; x++ ) {
@@ -63,7 +65,8 @@ public class Executor {
 
                     // prendo soli i nodi che mi interessano
                     if( comando.getNodeType() == 1 ) {
-                        System.out.println( comando.getNodeName() );
+                        System.out.println("[" + comando.getNodeName() + " " + i +
+                                "]" );
 
                         // itero il comando(solitamente avrà un elemento)
                         for( int z = 0 ; z < listaComando.getLength() ; z++ ) {
@@ -78,18 +81,23 @@ public class Executor {
 
                                 // la stringa che rappresenta il testo dentro al tag (es. "tiscaTusca")
                                 String infoComando = comandoDaEseguire.getTextContent();
-                                System.out.println( "trovato comando di nome '" + nomeComando + "' con testo '" + infoComando + "'" );
+                                System.out.println( nomeComando + "' con testo '" + infoComando + "'" );
+                                System.out.println( "------" );
 
-                                // inserisco il comando nell'array
+                                // inserisco il comando nell'array sotto forma di stringa
                                 comandiDaEseguire.add( nomeComando + "->" + infoComando );
                             }
                         }
                     }
                 }
+                System.out.println("Generato array di comandi sotto forma di stringhe:");
+                System.out.println();
                 System.out.println( comandiDaEseguire );
                 // infine posso far partire i test grazie alla lista di comandi da eseguire
                 // essendo un ciclo tanti più test ci saranno tanti più liste verranno create
                 // ed eseguite
+                System.out.println( "------" );
+                System.out.println("-----> Eseguo istruzione con seleniomator");
                 Seleniomator.runTests( comandiDaEseguire );
             }
         } catch( ParserConfigurationException | SAXException | IOException e ) {

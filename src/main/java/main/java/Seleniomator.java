@@ -27,50 +27,94 @@ public class Seleniomator {
         if( arrayDiComandi.size() == 0 ) {
             System.out.println("nessun comando da eseguire");
         } else {
+            System.out.println("Apro il browser");
             // apri chrome
             WebDriver driver = new ChromeDriver();
 
             int seconds = 0;
 
             // l'url da raggiungere
-            System.out.println( arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
+            System.out.println("Contatto l'url ---> " + arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
+            System.out.println( "------" );
 
             // contatto url
             driver.get( arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
-            boolean flag = true;
+
             // eseguo ciclo sui comandi
             for( String comando : arrayDiComandi ) {
 
-                // i vari comandi da eseguire
-                switch (comando.split( "->" )[0]) {
-                    case "clicca" -> {
-                        // la stringa
-                        String cssSelector = comando.split( "->")[1];
-                        System.out.println(cssSelector);
-                        WebElement selected = driver.findElement(By.cssSelector( cssSelector ) );
-                        System.out.println(selected);
-                        selected.click();
-                        System.out.println(cssSelector);
-                    }
+                // indice del comando
+                int indexOfComando = arrayDiComandi.indexOf(comando);
+                System.out.println("Eseguo comando numero " + indexOfComando);
 
-                    case "scrivi" -> {
-                        int indexOfComando = arrayDiComandi.indexOf(comando);
-                        int indexOfPreComando = indexOfComando - 1;
-                        System.out.println("Indice del comando precedente ->" + indexOfPreComando);
-                        String stringaPrecomando = arrayDiComandi.get( indexOfPreComando ).split( "->" )[1];
-                        System.out.println("Questa è la stringa del precomando -> " + stringaPrecomando);
-                        String stringaDaScrivere = comando.split( "->")[1];
-                        WebElement selected = driver.findElement(By.cssSelector( stringaPrecomando ) );
-                        selected.sendKeys( stringaDaScrivere );
-                    }
+                try {
+                    // i vari comandi da eseguire
+                    switch (comando.split( "->" )[0]) {
+                        case "clicca" -> {
+                            System.out.println("" + comando.split( "->")[0]);
 
-                    case "aspetta" -> {
-                        System.out.println("aspetto");
-                        seconds = Integer.parseInt(comando.split( "->" )[1].split( " " )[0]);
-                        setTimeoutSync(() -> System.out.println("test"), seconds * 1000);
-                    }
 
+                            // la stringa del nome comando
+                            String cssSelector = comando.split( "->")[1];
+
+                            System.out.println("Contenuto del comando ---> " + cssSelector);
+                            System.out.println( "------" );
+
+                            System.out.println("Seleziono elemento web con il selettore css '" + cssSelector + "'");
+                            System.out.println( "------" );
+                            WebElement selected = driver.findElement(By.cssSelector( cssSelector ) );
+                            System.out.println("Elemento trovato");
+                            System.out.println(selected);
+                            System.out.println( "------" );
+                            System.out.println("Clicco elemento");
+                            selected.click();
+                            System.out.println("------FINE COMANDO");
+                        }
+
+                        case "scrivi" -> {
+                            System.out.println("" + comando.split( "->")[0]);
+                            System.out.println( "------" );
+
+                            // prendo l'indice precedente
+                            int indexOfPreComando = indexOfComando - 1;
+                            System.out.println("Indice del comando precedente ->" + indexOfPreComando);
+                            System.out.println( "------" );
+
+                            String stringaPrecomando = arrayDiComandi.get( indexOfPreComando ).split( "->" )[1];
+                            System.out.println("Questa è la stringa del comando precedente -> " + stringaPrecomando);
+                            System.out.println( "------" );
+
+                            // la stringa che definisce cosa scrivere nell'input
+                            String stringaDaScrivere = comando.split( "->")[1];
+                            System.out.println("Questa è la stringa da scrivere nel comando precedente");
+                            System.out.println( "------" );
+
+                            System.out.println("Seleziono elemento web :");
+                            WebElement selected = driver.findElement(By.cssSelector( stringaPrecomando ) );
+                            System.out.println("Elemento selezionato ---> " + selected);
+
+                            System.out.println("Eseguo comando di scrittura");
+                            selected.sendKeys( stringaDaScrivere );
+                        }
+
+                        case "aspetta" -> {
+                            System.out.println("Contenuto del comando ---> " + comando);
+                            System.out.println( "------" );
+
+                            // secondi da aspettare
+                            seconds = Integer.parseInt(comando.split( "->" )[1].split( " " )[0]);
+
+                            System.out.println("Eseguo pausa di " + seconds + " secondi");
+                            setTimeoutSync(() -> System.out.println("test"), seconds * 1000);
+                            System.out.println("----Fine pausa");
+                        }
+
+                    }
+                } catch ( Exception e ) {
+                    System.out.println("----ERRORE NEL TEST, ESEGUO TEST SUCCESSIVO");
                 }
+
+
             }
 
             driver.close();
