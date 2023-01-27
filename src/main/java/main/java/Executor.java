@@ -14,10 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLReader {
-    private static final String FILENAME = "src/filesXML/istruzioni.xml";
+public class Executor {
 
-    public static void readFileXML() {
+    public static void readAndRun(String xmlName) {
 
         // Instantiate the Factory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -31,7 +30,7 @@ public class XMLReader {
             // parse XML file
             DocumentBuilder db = dbf.newDocumentBuilder();
 
-            Document doc = db.parse( new File( FILENAME ) );
+            Document doc = db.parse( new File( "src/filesXML/"+ xmlName +".xml" ) );
 
             // optional, but recommended
             doc.getDocumentElement().normalize();
@@ -95,6 +94,8 @@ public class XMLReader {
             }
         } catch( ParserConfigurationException | SAXException | IOException e ) {
             e.printStackTrace();
+        } catch( InterruptedException e ) {
+            throw new RuntimeException( e );
         }
 
     }

@@ -1,38 +1,81 @@
 <?xml version="1.0"?>
+<!--            apri accetta un url-->
+<!--            clicca accetta un selettore css-->
+<!--            aspetta accetta un numero, uno spazio e "secondi" -->
 <Istruzioni>
     <test nome="offerte filtraggio">
-        <comando id="1">
+        <comando>
+            <!--        vai sul sito amazon-->
             <apri>https://www.amazon.it/ref=nav_logo</apri>
         </comando>
-        <comando id="2">
+        <comando>
+            <!--        accetta i cookies-->
             <clicca>#sp-cc-accept</clicca>
         </comando>
+        <comando>
+<!--            clicca sulla barra di ricerca-->
+            <clicca>#twotabsearchtextbox</clicca>
+        </comando>
+        <comando>
+<!--            scrivi nella barra-->
+            <scrivi>giovanni</scrivi>
+        </comando>
+        <comando>
+<!--            clicca sulla lente di ricerca-->
+          <clicca>span[id='nav-search-submit-text']</clicca>
+        </comando>
+        <comando>
+            <!--        clicca sul pulsante Offerte-->
+            <clicca>a[class = 'nav-a  '][href = '/deals?ref_=nav_cs_gb']</clicca>
+        </comando>
+        <comando>
+<!--            clicco sul dropdown che si chiama Ordina per: In evidenza-->
+            <clicca>#sorting_dropdown0</clicca>
+        </comando>
+        <comando>
+<!--            aspetto 10 secondi-->
+            <aspetta>10 secondi</aspetta>
+        </comando>
+        <comando>
+<!--            seleziona l'ultima voce del dropdown-->
+            <clicca>#native_sorting_dropdown0_4</clicca>
+        </comando>
+        <comando>
+<!--            aspetta 5 secondi-->
+            <aspetta>5 secondi</aspetta>
+        </comando>
+        <comando>
+            <!--            clicca sulla barra di ricerca-->
+            <clicca>#twotabsearchtextbox</clicca>
+        </comando>
+        <comando>
+            <!--            scrivi nella barra-->
+            <scrivi>Ciao ciao :)</scrivi>
+        </comando>
+        <comando>
+            <aspetta>5 secondi</aspetta>
+        </comando>
+
     </test>
-    <test nome="offerte filtraggio">
-        <comando id="1">
+    <test nome="cerca pistola laser">
+        <comando>
             <apri>https://www.amazon.it/ref=nav_logo</apri>
         </comando>
-        <comando id="2">
+        <comando>
             <clicca>#sp-cc-accept</clicca>
+        </comando>
+        <comando>
+            <clicca>#twotabsearchtextbox</clicca>
+        </comando>
+        <comando>
+            <scrivi>pistola laser</scrivi>
+        </comando>
+        <comando>
+            <clicca>span[id='nav-search-submit-text']</clicca>
+        </comando>
+        <comando>
+            <aspetta>5 secondi</aspetta>
         </comando>
     </test>
 
-    <testwait id="2">
-        <comando id="3">
-            <aspetta>2 secondi</aspetta>
-        </comando>
-        <comando id="4">
-            <clicca>a[href="/deals?ref_=nav_cs_gb"][class="nav-a  "][tabindex="0"][data-csa-c-type="link"][data-csa-c-slot-id="nav_cs_3"][data-csa-c-content-id="nav_cs_gb"][data-csa-c-id="8ycy21-ut45ar-dqnu9p-5k2q3b"]</clicca>
-        </comando>
-        <comando id="5">
-            <aspetta>2 secondi</aspetta>
-        </comando>
-    </testwait>
-    <Elementi>
-        <!--        <a href="/deals?ref_=nav_cs_gb" class="nav-a  " tabindex="0" data-csa-c-type="link" data-csa-c-slot-id="nav_cs_3" data-csa-c-content-id="nav_cs_gb" data-csa-c-id="8ycy21-ut45ar-dqnu9p-5k2q3b">Offerte</a> -->
-        <BottoneOfferta>a[href="/deals?ref_=nav_cs_gb"][class="nav-a  "][tabindex="0"][data-csa-c-type="link"][data-csa-c-slot-id="nav_cs_3"][data-csa-c-content-id="nav_cs_gb"][data-csa-c-id="8ycy21-ut45ar-dqnu9p-5k2q3b"]</BottoneOfferta>
-        <SelectDropDow>
-            <select class="ex2">Ordina per</select>
-        </SelectDropDow>
-    </Elementi>
 </Istruzioni>
