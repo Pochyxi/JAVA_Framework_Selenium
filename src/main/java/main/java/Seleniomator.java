@@ -1,17 +1,16 @@
 package main.java;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Seleniomator {
 
@@ -21,11 +20,11 @@ public class Seleniomator {
             runnable.run();
         }
         catch (Exception e){
-            System.err.println(e);
+            System.err.println("errore" + e);
         }
     }
 
-    public static void runTests( List<String> arrayDiComandi, String browserName ) throws InterruptedException {
+    public static void runTests( List<String> arrayDiComandi, String browserName ) throws InterruptedException, NullPointerException {
         // se non esistono istruzioni
         if( arrayDiComandi.size() == 0 ) {
             System.out.println("nessun comando da eseguire");
@@ -34,29 +33,16 @@ public class Seleniomator {
             System.out.println("Apro il browser");
             switch (browserName){
 
-                case "chrome" -> {
-                    // apri chrome
-                     driver = new ChromeDriver();
-                }
+                case "chrome" -> driver = new ChromeDriver();
 
-                case "firefox" -> {
-                    // apri firefox
-                     driver = new FirefoxDriver();
-                }
+                case "firefox" -> driver = new FirefoxDriver();
 
-                case "edge" -> {
-                    // apri edge
-                     driver = new EdgeDriver();
-                }
+                case "edge" -> driver = new EdgeDriver();
 
-                case "safari" -> {
-                    // apri safari
-                     driver = new SafariDriver();
-                }
+
+                case "safari" -> driver = new SafariDriver();
+
             }
-
-
-            int seconds = 0;
 
             // l'url da raggiungere
             System.out.println("Contatto l'url ---> " + arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
@@ -89,6 +75,7 @@ public class Seleniomator {
 
                             System.out.println("Seleziono elemento web con il selettore css '" + cssSelector + "'");
                             System.out.println( "------" );
+                            assert driver != null;
                             WebElement selected = driver.findElement(By.cssSelector( cssSelector ) );
                             System.out.println("Elemento trovato");
                             System.out.println(selected);
@@ -117,6 +104,7 @@ public class Seleniomator {
                             System.out.println( "------" );
 
                             System.out.println("Seleziono elemento web :");
+                            assert driver != null;
                             WebElement selected = driver.findElement(By.cssSelector( stringaPrecomando ) );
                             System.out.println("Elemento selezionato ---> " + selected);
 
@@ -124,15 +112,30 @@ public class Seleniomator {
                             selected.sendKeys( stringaDaScrivere );
                         }
 
+                        case "premiRilascia" -> {
+                            System.out.println("" + comando.split( "->")[0]);
+                            System.out.println( "------" );
+
+                            String tastoDaPremere = comando.split( "->")[1];
+                            System.out.println("tasto da premere ----> " + tastoDaPremere);
+
+                            assert driver != null;
+                            new Actions(driver)
+                                    .keyDown(Keys.valueOf(tastoDaPremere))
+                                    .keyUp(Keys.valueOf(tastoDaPremere))
+                                    .perform();
+
+                        }
+
                         case "aspetta" -> {
                             System.out.println("Contenuto del comando ---> " + comando);
                             System.out.println( "------" );
 
                             // secondi da aspettare
-                            seconds = Integer.parseInt(comando.split( "->" )[1].split( " " )[0]);
+                            int seconds = Integer.parseInt(comando.split( "->" )[1].split( " " )[0]);
 
                             System.out.println("Eseguo pausa di " + seconds + " secondi");
-                            setTimeoutSync(() -> System.out.println("test"), seconds * 1000);
+                            setTimeoutSync(() -> System.out.println("----Inizio pausa"), seconds * 1000);
                             System.out.println("----Fine pausa");
                         }
 
@@ -144,10 +147,9 @@ public class Seleniomator {
 
             }
 
+
+            assert driver != null;
             driver.close();
         }
-
-
-//        driver.close();
     }
 }

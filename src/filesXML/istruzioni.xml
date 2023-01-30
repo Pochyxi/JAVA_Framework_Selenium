@@ -3,6 +3,7 @@
 <!--            <clicca> accetta un selettore css-->
 <!--            <aspetta> accetta un numero, uno spazio e "secondi" o anche "s" -->
 <!--            <scrivi> accetta il testo da inserire, necessita di un comando clicca che lo precede che sia di tipo input-->
+<!--            <premiRilascia> accetta l'input da tastiera specificato (consultare documentazione selenium), simula la pressione del tasto -->
 <!--            dopo l'ultimo comando verrà eseguita la chiusuro del browser-->
 <Istruzioni>
     <test nome="offerte filtraggio">
@@ -35,8 +36,8 @@
             <clicca>#sorting_dropdown0</clicca>
         </comando>
         <comando>
-<!--            aspetto 10 secondi-->
-            <aspetta>10 secondi</aspetta>
+<!--            aspetto 5 secondi-->
+            <aspetta>5 secondi</aspetta>
         </comando>
         <comando>
 <!--            seleziona l'ultima voce del dropdown-->
@@ -55,10 +56,13 @@
             <scrivi>Ciao ciao :)</scrivi>
         </comando>
         <comando>
+            <premiRilascia>ENTER</premiRilascia>
+        </comando>
+        <comando>
             <aspetta>5 secondi</aspetta>
         </comando>
-
     </test>
+
     <test nome="cerca pistola laser">
         <comando>
 <!--            vai su amazon-->
