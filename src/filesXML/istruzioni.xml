@@ -1,10 +1,15 @@
 <?xml version="1.0"?>
-<!--            <apri> accetta un url-->
-<!--            <clicca> accetta un selettore css-->
-<!--            <aspetta> accetta un numero, uno spazio e "secondi" o anche "s" -->
-<!--            <scrivi> accetta il testo da inserire, necessita di un comando clicca che lo precede che sia di tipo input-->
-<!--            <premiRilascia> accetta l'input da tastiera specificato (consultare documentazione selenium), simula la pressione del tasto -->
-<!--            dopo l'ultimo comando verrà eseguita la chiusuro del browser-->
+<!--            ||<apri>|| accetta un url-->
+
+<!--            ||<clicca>|| accetta un selettore css-->
+
+<!--            ||<aspetta>|| accetta un numero, uno spazio e "secondi" o anche "s" -->
+
+<!--            ||<scrivi>|| accetta il testo da inserire, necessita di un comando clicca che lo precede che sia di tipo input-->
+
+<!--            ||<premiRilascia>|| accetta l'input da tastiera specificato (consultare documentazione selenium), simula la pressione del tasto -->
+
+<!--            dopo l'ultimo comando verrà eseguita la chiusura del browser-->
 <Istruzioni>
     <test nome="offerte filtraggio">
         <comando>

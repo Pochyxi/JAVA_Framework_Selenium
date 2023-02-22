@@ -33,7 +33,10 @@ public class Seleniomator {
             System.out.println("Apro il browser");
             switch (browserName){
 
-                case "chrome" -> driver = new ChromeDriver();
+                case "chrome" -> {
+                    driver = new ChromeDriver();
+                    driver.manage().window().maximize();
+                }
 
                 case "firefox" -> driver = new FirefoxDriver();
 
@@ -43,6 +46,8 @@ public class Seleniomator {
                 case "safari" -> driver = new SafariDriver();
 
             }
+
+
 
             // l'url da raggiungere
             System.out.println("Contatto l'url ---> " + arrayDiComandi.get( 0 ).split( "->" )[ 1 ] );
